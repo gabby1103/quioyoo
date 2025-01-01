@@ -1,0 +1,56 @@
+{% extends 'appointments/base.html' %}
+
+{% block title %}Appointment List - Nail Salon{% endblock %}
+
+{% block content %}
+    <h1>All Appointments</h1>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Phone</th>
+                <th>Employee</th>
+                <th>Services</th> 
+                <th>Appointment Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+                <tr>
+                    <td>{{ appointment.customer_name }}</td>
+                    <td>{{ appointment.customer_phone }}</td>
+                    <td>{{ appointment.employee.name }}</td>
+
+                    <td>
+                        {% for service in appointment.services.all %}
+                            <span>{{ service.name }}</span>{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+
+                    <td>{{ appointment.appointment_time }}</td>
+                    <td>{{ appointment.status }}</td>
+
+                    <td>
+                        <a href="{% url 'appointments:edit_appointment' appointment.id %}" class="btn btn-warning">Edit</a>
+
+                        {% if appointment.status == 'Scheduled' %}
+                            <a href="{% url 'appointments:cancel_appointment' appointment.id %}" class="btn btn-danger"
+                               onclick="return confirm('Are you sure you want to cancel this appointment?')">Cancel</a>
+                        {% endif %}
+
+                        {% if appointment.status == 'Scheduled' %}
+                            <a href="{% url 'appointments:complete_appointment' appointment.id %}" class="btn btn-success"
+                               onclick="return confirm('Are you sure you want to mark this appointment as completed?')">Complete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="7">No appointments available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

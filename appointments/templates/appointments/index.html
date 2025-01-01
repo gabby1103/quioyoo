@@ -1,0 +1,38 @@
+{% extends 'appointments/base.html' %}
+
+{% block title %}Index{% endblock %}
+{% load static %}
+
+{% block content %}
+<section class="home" id="home">
+    <div class="content">
+        <h3> Louie's Salon </h3>
+        <span> natural & beautiful  </span>
+
+    </div>
+
+</section>
+
+<section class="about" id="about">
+
+    <h1 class="heading"><span> about </span> us </h1>
+
+    <div class="row">
+
+        <div class="photo">
+            <img src="{% static 'photos/nail.jpg' %}">
+            <h3>best nail design</h3>
+        </div>
+
+        <div class="content"> 
+            <h3>choose us!</h3>
+            <p>Our committed and competent team is here to help keep your hair, nails, skin, and body healthy and beautiful. 
+                In addition to our regular beauty services such as pedicures, manicures, and hair services we will continue 
+                to perfect our skills and keep educated on all the latest styles. Enjoy our wide range of services in a cozy 
+                and luxurious environment. We look forward to serving you!</p>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

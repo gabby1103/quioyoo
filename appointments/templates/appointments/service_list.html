@@ -1,0 +1,43 @@
+<!-- appointments/service_list.html -->
+{% extends 'appointments/base.html' %}
+
+{% block title %}Service List{% endblock %}
+
+{% block content %}
+<h1>Service List</h1>
+<table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Duration</th>
+                <th>Photo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for service in services %}
+                <tr>
+                    <td>{{ service.name }}</td>
+                    <td>{{ service.description }}</td>
+                    <td>{{ service.price }}</td>
+                    <td>{{ service.duration }}</td>
+                    <td>
+                        {% if service.photo %}
+                            <img src="{{ service.photo.url }}" alt="{{ service.name }}" width="50" />
+                        {% else %}
+                            <img src="/path/to/default/image.jpg" alt="Default Image" width="50" />
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'appointments:edit_service' service.id %}">Edit</a> |
+                        <a href="{% url 'appointments:delete_service' service.id %}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'appointments:create_service' %}">Create Service</a>
+    
+{% endblock %}

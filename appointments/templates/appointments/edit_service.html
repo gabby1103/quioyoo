@@ -1,0 +1,13 @@
+
+{% extends 'appointments/base.html' %}
+
+{% block title %}Edit service{% endblock %}
+
+{% block content %}
+<h2>Edit Service</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+</form>
+{% endblock %}
