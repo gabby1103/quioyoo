@@ -3,12 +3,94 @@
 {% block title %}Book an Appointment{% endblock %}
 
 {% block content %}
-<form method="POST">
+<div class="container" style="width: 1000px; ">
+<form method="POST" class="custom-form" >
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Book Appointment</button>
-</form>
+    
+    <h2>Book an Appointment</h2>
 
+    <!-- Employee Field -->
+    <div class="form-group">
+        <label for="{{ form.employee.id_for_label }}">Employee</label>
+        {{ form.employee }}
+        {% if form.employee.errors %}
+            <div class="error">
+                {% for error in form.employee.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Customer Name Field -->
+    <div class="form-group">
+        <label for="{{ form.customer_name.id_for_label }}">Customer Name</label>
+        {{ form.customer_name }}
+        {% if form.customer_name.errors %}
+            <div class="error">
+                {% for error in form.customer_name.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Customer Phone Field -->
+    <div class="form-group">
+        <label for="{{ form.customer_phone.id_for_label }}">Customer Phone</label>
+        {{ form.customer_phone }}
+        {% if form.customer_phone.errors %}
+            <div class="error">
+                {% for error in form.customer_phone.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Appointment Time Field -->
+    <div class="form-group">
+        <label for="{{ form.appointment_time.id_for_label }}">Appointment Time</label>
+        {{ form.appointment_time }}
+        {% if form.appointment_time.errors %}
+            <div class="error">
+                {% for error in form.appointment_time.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Services Field (Dropdown with checkboxes) -->
+    <div class="form-group">
+        <label for="{{ form.services.id_for_label }}">Services</label>
+        {{ form.services }}
+        {% if form.services.errors %}
+            <div class="error">
+                {% for error in form.services.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Nail Design Field (Optional) -->
+    <div class="form-group">
+        <label for="{{ form.nail_design.id_for_label }}">Nail Design</label>
+        {{ form.nail_design }}
+        {% if form.nail_design.errors %}
+            <div class="error">
+                {% for error in form.nail_design.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="submit-button">Book Appointment</button>
+</form>
+</div>
 {% if form.errors %}
     <ul>
         {% for field in form %}
@@ -19,4 +101,15 @@
     </ul>
 {% endif %}
 
+<!-- Initialize Select2 on the services field -->
+<script>
+    $(document).ready(function() {
+        // Initialize Select2 on the services field (multi-select dropdown with checkboxes)
+        $('#id_services').select2({
+            placeholder: "Select services",
+            allowClear: true
+        });
+    });
+</script>
 {% endblock %}
+    

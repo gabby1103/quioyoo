@@ -1,0 +1,71 @@
+{% extends 'appointments/base.html' %}
+
+{% block title %}{{ action }} Nail Design{% endblock %}
+
+{% block content %}
+<div class="container" style="width: 1000px; ">
+<h1>{{ action }} Nail Design</h1>
+
+<form method="post" enctype="multipart/form-data" class="custom-form">
+    {% csrf_token %}
+
+    <!-- Nail Design Name Field -->
+    <div class="form-group">
+        <label for="{{ form.name.id_for_label }}">Name</label>
+        {{ form.name }}
+        {% if form.name.errors %}
+            <div class="error">
+                {% for error in form.name.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Nail Design Description Field -->
+    <div class="form-group">
+        <label for="{{ form.description.id_for_label }}">Description</label>
+        {{ form.description }}
+        {% if form.description.errors %}
+            <div class="error">
+                {% for error in form.description.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Nail Design Price Field -->
+    <div class="form-group">
+        <label for="{{ form.price.id_for_label }}">Price</label>
+        {{ form.price }}
+        {% if form.price.errors %}
+            <div class="error">
+                {% for error in form.price.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Nail Design Photo Field -->
+    <div class="form-group">
+        <label for="{{ form.photo.id_for_label }}">Photo</label>
+        {{ form.photo }}
+        {% if form.photo.errors %}
+            <div class="error">
+                {% for error in form.photo.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="submit-button">{{ action }} Nail Design</button>
+</form>
+
+<br>
+<a href="{% url 'appointments:nail_design_list' %}">Back to Nail Designs</a>
+</div>
+{% endblock %}

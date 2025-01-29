@@ -1,0 +1,255 @@
+/* Global Styles */
+html {
+  font-size: 70%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #e3f2fd;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.sidebar a {
+  display: block;
+  padding: 10px;
+  margin-bottom: 10px;
+  color: #000;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.5rem;
+}
+
+.sidebar a:hover {
+  background-color: #d2e4f7;
+}
+
+.sidebar .navbar-brand {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.main-content {
+  margin-left: 250px; /* Matches the width of the sidebar */
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto; /* Scrolls the main content if it overflows */
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  min-width: 320px; /* Prevent extremely narrow layouts */
+}
+
+/* Section Padding */
+section {
+  padding: 10px;
+}
+
+/* Navigation Styling */
+nav {
+  font-size: 2rem;
+}
+
+/* Home Page Styling */
+.home {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  background: url(../photos/front.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%; /* Ensure full width */
+}
+
+.home .content {
+  margin-top: -30%;
+  margin-left: 30%;
+  max-width: 70rem;
+  min-width: 300px; /* Prevent content from being too small */
+}
+
+.home .content h3 {
+  font-size: 6rem;
+  color: #ba07f0;
+}
+
+.home .content span {
+  margin-left: 3rem;
+  font-size: 3.5rem;
+  color: #4400fd;
+  padding: 1rem 0;
+  line-height: 1.5;
+}
+
+/* About Section */
+.about .row {
+  display: flex;
+  align-items: center;
+  margin-left: 5rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+  padding-bottom: 3rem;
+}
+
+.about .row .photo {
+  flex: 1 1 40rem;
+  position: relative;
+}
+
+.about .row .photo img {
+  width: 70%;
+  border: 1.5rem solid #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  height: auto;
+  object-fit: cover;
+}
+
+.about .row .photo h3 {
+  position: absolute;
+  top: 25%;
+  transform: translateY(-75%);
+  font-size: 3rem;
+  background: #fff;
+  width: 100%;
+  padding: 1rem 2rem;
+  mix-blend-mode: screen;
+}
+
+.about .row .content {
+  flex: 1 1 40rem;
+}
+
+.about .row .content h3 {
+  font-size: 5rem;
+  margin-left: 5%;
+  color: #333333;
+}
+
+.about .row .content p {
+  font-size: 1.5rem;
+  color: #999;
+  padding: 1.5rem 0;
+  padding-top: 1rem;
+  line-height: 1.5;
+}
+
+/* Form Styling */
+form {
+  align-items: center;
+  padding-top: 400px;
+  max-width: 400px;
+  margin: auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ensure form adapts to container width */
+}
+
+div {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #0066cc;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #666;
+  padding: 4rem;
+  margin: 3rem 0;
+  background-color: #f1a3ce;
+  z-index: 30;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid #0066cc;
+  border-radius: 5px;
+  background-color: #e6f7ff;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+button:hover {
+  background-color: #3399ff;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+}
+
+input:focus {
+  outline: none;
+  border-color: #3399ff;
+  box-shadow: 0 0 5px rgba(51, 153, 255, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .home .content {
+      margin-top: 0;
+      margin-left: 0;
+      text-align: center;
+  }
+
+  .home .content h3 {
+      font-size: 4rem;
+  }
+
+  .home .content span {
+      font-size: 2.5rem;
+  }
+
+  .about .row {
+      margin-left: 0;
+  }
+
+  .about .row .content h3 {
+      font-size: 4rem;
+      margin-left: 0;
+  }
+
+  h1 {
+      font-size: 1.5rem;
+  }
+}

@@ -1,56 +1,50 @@
 {% extends 'appointments/base.html' %}
 
-{% block title %}Appointment List - Nail Salon{% endblock %}
+{% block title %}Appointments{% endblock %}
 
 {% block content %}
-    <h1>All Appointments</h1>
-    <table class="table table-bordered">
+<h1>Appointments</h1>
+
+{% if request.user.is_staff %}
+    <p>You are an admin and can see all appointments.</p>
+
+{% endif %}
+
+{% if appointments %}
+    <table class="table table-bordered" style="width: 1000px;">
         <thead>
             <tr>
+                <th>User</th>
                 <th>Customer Name</th>
-                <th>Phone</th>
                 <th>Employee</th>
-                <th>Services</th> 
-                <th>Appointment Date</th>
+                <th>Appointment Time</th>
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for appointment in appointments %}
-                <tr>
-                    <td>{{ appointment.customer_name }}</td>
-                    <td>{{ appointment.customer_phone }}</td>
-                    <td>{{ appointment.employee.name }}</td>
+    <tr>
+        <td>{{appointment.user}}</td>
+        <td>{{ appointment.customer_name }}</td>
+        <td>{{ appointment.employee.name }}</td>
+        <td>{{ appointment.appointment_time }}</td>
+        <td>{{ appointment.status }}</td>
+        <td>
+            {% if appointment.status == 'Scheduled' %}
+                <a href="{% url 'appointments:edit_appointment' appointment.id %}">Edit</a> |
+                <a href="{% url 'appointments:cancel_appointment' appointment.id %}">Cancel</a>
+            {% endif %}
 
-                    <td>
-                        {% for service in appointment.services.all %}
-                            <span>{{ service.name }}</span>{% if not forloop.last %}, {% endif %}
-                        {% endfor %}
-                    </td>
-
-                    <td>{{ appointment.appointment_time }}</td>
-                    <td>{{ appointment.status }}</td>
-
-                    <td>
-                        <a href="{% url 'appointments:edit_appointment' appointment.id %}" class="btn btn-warning">Edit</a>
-
-                        {% if appointment.status == 'Scheduled' %}
-                            <a href="{% url 'appointments:cancel_appointment' appointment.id %}" class="btn btn-danger"
-                               onclick="return confirm('Are you sure you want to cancel this appointment?')">Cancel</a>
-                        {% endif %}
-
-                        {% if appointment.status == 'Scheduled' %}
-                            <a href="{% url 'appointments:complete_appointment' appointment.id %}" class="btn btn-success"
-                               onclick="return confirm('Are you sure you want to mark this appointment as completed?')">Complete</a>
-                        {% endif %}
-                    </td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="7">No appointments available.</td>
-                </tr>
-            {% endfor %}
+            {% if request.user.is_staff and appointment.status == 'Scheduled' %}
+                | <a href="{% url 'appointments:complete_appointment' appointment.id %}">Complete</a>
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}
         </tbody>
     </table>
+{% else %}
+    <p>You have no appointments.</p>
+{% endif %}
 {% endblock %}

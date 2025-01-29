@@ -1,0 +1,68 @@
+{% extends 'appointments/base.html' %}
+
+{% block title %}Employee List{% endblock %}
+
+{% block content %}
+<div class="container" style="width: 1000px; ">
+<h1>{{ action }} Inventory Item</h1>
+
+<form method="POST" class="custom-form">
+    {% csrf_token %}
+    
+    <!-- Inventory Item Name Field -->
+    <div class="form-group">
+        <label for="{{ form.name.id_for_label }}">Name</label>
+        {{ form.name }}
+        {% if form.name.errors %}
+            <div class="error">
+                {% for error in form.name.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Inventory Item Description Field -->
+    <div class="form-group">
+        <label for="{{ form.description.id_for_label }}">Description</label>
+        {{ form.description }}
+        {% if form.description.errors %}
+            <div class="error">
+                {% for error in form.description.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Inventory Item Quantity in Stock Field -->
+    <div class="form-group">
+        <label for="{{ form.quantity_in_stock.id_for_label }}">Quantity in Stock</label>
+        {{ form.quantity_in_stock }}
+        {% if form.quantity_in_stock.errors %}
+            <div class="error">
+                {% for error in form.quantity_in_stock.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Inventory Item Price per Unit Field -->
+    <div class="form-group">
+        <label for="{{ form.price_per_unit.id_for_label }}">Price per Unit</label>
+        {{ form.price_per_unit }}
+        {% if form.price_per_unit.errors %}
+            <div class="error">
+                {% for error in form.price_per_unit.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="submit-button">{{ action }}</button>
+</form>
+</div>
+{% endblock %}

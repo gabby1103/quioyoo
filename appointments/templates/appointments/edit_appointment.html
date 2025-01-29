@@ -1,12 +1,89 @@
 {% extends 'appointments/base.html' %}
 
-{% block title %}Edit Appointment{% endblock %}
+{% block title %}Book an Appointment{% endblock %}
 
 {% block content %}
-    <h1>Edit Appointment</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Update Appointment</button>
-    </form>
+<form method="POST" class="custom-form">
+    {% csrf_token %}
+    
+    <h2>Edit an Appointment</h2>
+
+    <!-- Employee Field -->
+    <div class="form-group">
+        <label for="{{ form.employee.id_for_label }}">Employee</label>
+        {{ form.employee }}
+        {% if form.employee.errors %}
+            <div class="error">
+                {% for error in form.employee.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Customer Name Field -->
+    <div class="form-group">
+        <label for="{{ form.customer_name.id_for_label }}">Customer Name</label>
+        {{ form.customer_name }}
+        {% if form.customer_name.errors %}
+            <div class="error">
+                {% for error in form.customer_name.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Customer Phone Field -->
+    <div class="form-group">
+        <label for="{{ form.customer_phone.id_for_label }}">Customer Phone</label>
+        {{ form.customer_phone }}
+        {% if form.customer_phone.errors %}
+            <div class="error">
+                {% for error in form.customer_phone.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Appointment Time Field -->
+    <div class="form-group">
+        <label for="{{ form.appointment_time.id_for_label }}">Appointment Time</label>
+        {{ form.appointment_time }}
+        {% if form.appointment_time.errors %}
+            <div class="error">
+                {% for error in form.appointment_time.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Services Field -->
+    <div class="form-group">
+        <label for="{{ form.services.id_for_label }}">Services</label>
+        {{ form.services }}
+        {% if form.services.errors %}
+            <div class="error">
+                {% for error in form.services.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="submit-button">Book Appointment</button>
+</form>
+
+{% if form.errors %}
+    <ul>
+        {% for field in form %}
+            {% for error in field.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+{% endif %}
 {% endblock %}

@@ -1,0 +1,37 @@
+<!-- appointments/nail_design_list.html -->
+{% extends 'appointments/base.html' %}
+
+{% block content %}
+  <h1>Nail Designs</h1>
+  {% if user.is_staff %}
+  <a href="{% url 'appointments:create_nail_design' %}">Add New Nail Design</a>
+  {% endif %}
+
+  <div class="row">
+    {% for nail_design in nail_designs %}
+      <div class="col-md-3 mb-4"> <!-- 4 cards per row using col-md-3 -->
+        <div class="card">
+          <img src="{{ nail_design.photo.url }}" class="card-img-top" alt="{{ nail_design.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ nail_design.name }}</h5>
+            <p class="card-text">{{ nail_design.description }}</p>
+            <p class="card-text">
+              <small class="text-muted">Price: {{ nail_design.price }} pesos</small>
+            </p><br> 
+
+            {% if user.is_staff %}
+              <a href="{% url 'appointments:edit_nail_design' nail_design.pk %}">Edit</a>
+
+                                <form action="{% url 'appointments:delete_nail_design' nail_design.id %}" method="POST" style="display: inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this nail design?')">Delete nail design</button>
+                                </form>
+
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}
